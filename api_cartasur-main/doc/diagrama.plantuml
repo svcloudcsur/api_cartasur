@@ -1,0 +1,28 @@
+@startuml
+
+title API Cartasur - Arquitectura
+
+component [internal system]
+
+cloud Network {
+}
+
+node "Flask APP" {
+    [API]
+    [Data Access]
+}
+
+package "MongoDB" {
+    [Clientes]
+    [Creditos]
+    [Cuotas]
+    [Pagos]
+    [ml_training]
+}
+
+[internal system] -down-> Network
+Network -down-> [API]
+[API] -> [Data Access]
+[Data Access] -right-> MongoDB
+
+@enduml

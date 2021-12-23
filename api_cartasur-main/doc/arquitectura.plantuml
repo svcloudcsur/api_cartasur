@@ -1,0 +1,16 @@
+@startuml
+
+actor CartasurUser
+cloud InternalNetwork
+
+package PreditionService {
+    component ApiCartasur
+    database MongoDB
+}
+
+CartasurUser -right-> InternalNetwork
+InternalNetwork -right-> ApiCartasur
+ApiCartasur -right-> MongoDB
+
+@enduml
+
