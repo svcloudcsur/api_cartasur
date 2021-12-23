@@ -1,0 +1,8 @@
+Flask == 1.1.2              # Flask MVC
+pymongo == 3.11.3           # MongoDB in python
+Flask-PyMongo == 2.3.0      # MongoDB for Flask
+pandas == 1.2.3             # File manipulation
+python-dateutil == 2.8.1    # Fields normalization
+scikit-learn == 0.24.1      # To encode strings
+dask == 2021.6.0            # To use large dataframes
+ipdb == 0.13.9              # For Python debugging

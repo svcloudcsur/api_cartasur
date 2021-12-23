@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+      args:
+        MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - ./database/volume:/data/db
+
+  redis:
+    build:
+      args:
+        REDIS_URL: ${REDIS_URL}
+      context: ./redis
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      FLASK_ENV: "development"
+      LOG_LEVEL: "INFO"
+      UPLOAD_FOLDER: ${UPLOAD_FOLDER}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      MONGO_INITDB_HOSTNAME: 'database'
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - 80:80
+    depends_on:
+      - database
+    volumes:
+      - ./app:/app
