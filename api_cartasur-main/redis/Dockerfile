@@ -1,9 +1,0 @@
-FROM redis:6.0.10-alpine
-
-ARG REDIS_URL=default
-ARG REDIS_PASSWORD=default
-ARG ALLOW_EMPTY_PASSWORD=default
-
-ENV REDIS_URL=$REDIS_URL
-
-RUN echo $REDIS_URL
